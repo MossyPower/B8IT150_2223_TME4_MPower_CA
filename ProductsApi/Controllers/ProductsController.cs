@@ -10,7 +10,7 @@ using ProductsApi.Models;
 
 namespace ProductsApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/api/v1/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {

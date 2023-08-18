@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/B8IT150_2223_TME4_MPower_CA/FarmApp/FarmApp.csproj": {}
+    "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\FarmApp.csproj": {}
   },
   "projects": {
-    "/workspaces/B8IT150_2223_TME4_MPower_CA/FarmApp/FarmApp.csproj": {
+    "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\FarmApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/B8IT150_2223_TME4_MPower_CA/FarmApp/FarmApp.csproj",
+        "projectUniqueName": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\FarmApp.csproj",
         "projectName": "FarmApp",
-        "projectPath": "/workspaces/B8IT150_2223_TME4_MPower_CA/FarmApp/FarmApp.csproj",
-        "packagesPath": "/home/codespace/.nuget/packages/",
-        "outputPath": "/workspaces/B8IT150_2223_TME4_MPower_CA/FarmApp/obj/",
+        "projectPath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\FarmApp.csproj",
+        "packagesPath": "C:\\Users\\mossy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/codespace/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\mossy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/dotnet/7.0.305/sdk/7.0.305/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,13 +52,29 @@
               "target": "Package",
               "version": "[7.0.8, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[7.0.8, )"
+              "version": "[7.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.8, )"
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.9, )"
             }
           },
           "imports": [
@@ -79,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/dotnet/7.0.305/sdk/7.0.305/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
