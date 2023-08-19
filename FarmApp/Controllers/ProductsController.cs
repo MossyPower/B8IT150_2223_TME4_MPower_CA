@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FarmApp.Data;
 using FarmApp.Models;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace FarmApp.Controllers
 {
@@ -39,22 +44,29 @@ namespace FarmApp.Controllers
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Product == null)
+            HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");
+            string requestUri = $"/api/v1/products/{id}";
+
+            HttpResponseMessage response = await client.GetAsync(requestUri);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var product = await response.Content.ReadFromJsonAsync<Product>();
+                return View(product);
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return NotFound();
             }
-
-            var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            else
             {
-                return NotFound();
+                // Handle other error cases
+                return StatusCode((int)response.StatusCode);
             }
-
-            return View(product);
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -65,31 +77,50 @@ namespace FarmApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Size,Category,Price")] Product product)
+        public async Task<IActionResult> Create(Product product)
         {
-            if (ModelState.IsValid)
+            HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");
+            string requestUri = "/api/v1/products";
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(requestUri, product);
+
+            if (response.IsSuccessStatusCode)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            return View(product);
+            else
+            {
+                return StatusCode((int)response.StatusCode);
+            }
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Product == null)
+            if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            var product = await _context.Product.FindAsync(id);
-            if (product == null)
+            HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");
+            string requestUri = $"/api/v1/products/{id}";
+
+            HttpResponseMessage response = await client.GetAsync(requestUri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var product = await response.Content.ReadFromJsonAsync<Product>();
+                return View(product);
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return NotFound();
             }
-            return View(product);
+            else
+            {
+                return StatusCode((int)response.StatusCode);
+            }
         }
 
         // POST: Products/Edit/5
@@ -97,71 +128,84 @@ namespace FarmApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Size,Category,Price")] Product product)
+        public async Task<IActionResult> Edit(int id, Product product)
         {
             if (id != product.Id)
             {
+                return BadRequest();
+            }
+            
+            HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");
+            string requestUri = $"/api/v1/products/{id}";
+
+            HttpResponseMessage response = await client.PutAsJsonAsync(requestUri, product);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Details", new { id = product.Id });
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            else
             {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return StatusCode((int)response.StatusCode);
             }
-            return View(product);
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Product == null)
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            
+            HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");
+            string requestUri = $"/api/v1/products/{id}";
+
+            HttpResponseMessage response = await client.GetAsync(requestUri);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var product = await response.Content.ReadFromJsonAsync<Product>();
+                return View(product);
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return NotFound();
             }
-
-            var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            else
             {
-                return NotFound();
+                return StatusCode((int)response.StatusCode);
             }
-
-            return View(product);
         }
 
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Product == null)
+            HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");
+            string requestUri = $"/api/v1/products/{id}";
+
+            HttpResponseMessage response = await client.DeleteAsync(requestUri);
+
+            if (response.IsSuccessStatusCode)
             {
-                return Problem("Entity set 'ApplicationDbContext.Product'  is null.");
+                return RedirectToAction("Index");
             }
-            var product = await _context.Product.FindAsync(id);
-            if (product != null)
+            else if (response.StatusCode == HttpStatusCode.NotFound)
             {
-                _context.Product.Remove(product);
+                return NotFound();
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                return StatusCode((int)response.StatusCode);
+            }
         }
 
         private bool ProductExists(int id)
