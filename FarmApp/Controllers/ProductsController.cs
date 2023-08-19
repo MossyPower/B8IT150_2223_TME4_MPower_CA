@@ -65,6 +65,16 @@ namespace FarmApp.Controllers
             }
         }
 
+
+
+
+
+
+
+
+
+
+
         // GET: Products/Create
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
