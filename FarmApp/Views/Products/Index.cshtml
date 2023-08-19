@@ -7,16 +7,60 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Produce</h1>
 
-@if (SignInManager.IsSignedIn(User))
+@* @if (SignInManager.IsSignedIn(User)) *@
+@if (User.IsInRole("Administrator"))
 {
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create">Add New Product</a>
     </p>
 }
 
-<table class="table">
+<div class="container">
+  <div class="row">
+    @foreach (var item in Model)
+    {
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          @* <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImageURL)" alt="@Html.DisplayNameFor(model => item.ImageURL)"> *@
+          <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">@Html.DisplayNameFor(model => item.Category): @Html.DisplayFor(modelItem => item.Category)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => item.Size): @Html.DisplayFor(modelItem => item.Size)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => item.Price): € @Html.DisplayFor(modelItem => item.Price)</li>
+          </ul>
+          <div class="card-body">
+            <a class="btn btn-success float-right" asp-action="Details" asp-route-id="@item.Id">
+              <i class="bi bi-eye-fill"></i> View Details
+            </a>
+            <a class="btn btn-primary float-right add-to-cart-btn" data-product-id="@item.Id">
+              <i class="bi bi-cart-plus"></i> Add to Cart
+            </a>
+          </div>
+
+          @if (User.IsInRole("Administrator"))
+          {
+            <hr />
+            <div class="card-body">
+              <h5>[Administration Tools]</h5>
+              <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+              <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+
+
+
+
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -49,7 +93,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            @if (SignInManager.IsSignedIn(User))
+            @if (User.IsInRole("Administrator"))
             {
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -60,4 +104,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@

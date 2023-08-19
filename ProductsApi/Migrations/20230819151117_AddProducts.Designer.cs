@@ -10,7 +10,7 @@ using ProductsApi.Data;
 namespace ProductsApi.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20230817204301_AddProducts")]
+    [Migration("20230819151117_AddProducts")]
     partial class AddProducts
     {
         /// <inheritdoc />
@@ -28,13 +28,37 @@ namespace ProductsApi.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Fertiliser")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Fungicide")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Herbicide")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Pesticide")
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Season")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Size")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Variety")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
