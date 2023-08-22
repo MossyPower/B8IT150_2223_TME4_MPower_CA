@@ -23,8 +23,8 @@ namespace FarmApp.Controllers
         public async Task<IActionResult> Index(
             int pageNumber = 1, 
             int pageSize = 10, 
-            string sortBy = null,
-            string search = null)
+            string? sortBy = null,
+            string? search = null)
         {
             var apiClient = _clientFactory.CreateClient("ProductsApi");
             var apiUrl = $"api/v1/products?pageNumber={pageNumber}&pageSize={pageSize}&sortBy={sortBy}&search={search}";
@@ -35,6 +35,11 @@ namespace FarmApp.Controllers
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ProductsViewModel>(content);
+
+                result.PageSize = pageSize; // Store the current page size
+                result.CurrentPage = pageNumber; // Store the current page number
+                result.SortBy = sortBy; // Store the current sort option
+                result.SearchTerm = search; // Store the current search term
 
                 return View(result);
             }

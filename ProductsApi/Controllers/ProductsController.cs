@@ -30,22 +30,33 @@ namespace ProductsApi.Controllers
         [HttpGet]
         public IActionResult GetProducts(
             int pageNumber = 1,
-            int pageSize = 10, 
+            int pageSize = 10, // Nr of items per page
             string sortBy = null, 
             string search = null)
         {
             var query = _context.Products.AsQueryable();
 
-            // Filtering
-            if (!string.IsNullOrWhiteSpace(search))
+            // Searching 
+            if (!string.IsNullOrEmpty(search))
             {
-                query = query.Where(p => p.Title.Contains(search));
+                query = query.Where(p => EF.Functions.Like(p.Title, $"%{search}%"));
             }
 
             // Sorting
             if (!string.IsNullOrWhiteSpace(sortBy))
             {
-                query = query.OrderBy(p => p.Title); // Example sorting by name
+                if (sortBy == "Title")
+                {
+                    query = query.OrderBy(p => p.Title);
+                }
+                else if (sortBy == "Category")
+                {
+                    query = query.OrderBy(p => p.Category);
+                }
+                else if (sortBy == "Price")
+                {
+                    query = query.OrderBy(p => p.Price);
+                }
             }
 
             // Pagination

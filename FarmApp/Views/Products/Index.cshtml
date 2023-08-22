@@ -17,64 +17,92 @@
 }
 
 @* Add for Search and Sort functions *@
-<form asp-controller="Products" asp-action="Index" method="get">
+<form id="searchForm" asp-controller="Products" asp-action="Index" method="get">
     <div class="search-sort-container">
         <div class="search-form">
-            <input type="text" class="form-control search-input" placeholder="Search by product name, or category" aria-label="Search for product" aria-describedby="basic-addon2" name="searchString" />
+            <input id="searchInput" type="text" class="form-control" name="search" placeholder="Search by product name, or category" aria-label="Search for product" aria-describedby="basic-addon2"/>
             <div class="btn-group">
-                <button class="btn btn-success search-btn" type="submit" value="Search">Search</button>
-                <button class="btn btn-primary" asp-action="Index" type="submit" value="Search">Back to Full List</button>
+                <button class="btn btn-success search-btn" type="submit" value="@Model.SearchTerm">Search</button>
+                <button class="btn btn-primary back-btn" type="button">Back to Full List</button>
             </div>
         </div>
     </div>
 </form>
 <br>
-@* Add Product cards *@
-<div class="container">
-  <div class="row">
-    @foreach (var product in Model.Products)
-    {
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="@Html.DisplayFor(modelItem => product.Image)" alt="@Html.DisplayNameFor(model => product.Image)">
-          <div class="card-body">
-            <h5 class="card-title">@product.Title</h5> 
+<button class="btn btn-primary" asp-action="Index" type="submit" value="Search">Back to Full List</button>
 
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">@product.Category</li>
-            <li class="list-group-item">@product.Size</li>
-            <li class="list-group-item">@product.Price</li>
-
-          </ul>
-          <div class="card-body">
-            <a class="btn btn-success float-right" asp-action="Details" asp-route-id="@product.Id">
-              <i class="bi bi-eye-fill"></i> View Details
-            </a>
-            <a class="btn btn-primary float-right add-to-cart-btn" data-product-id="@product.Id">
-              <i class="bi bi-cart-plus"></i> Add to Cart
-            </a>
-          </div>
-
-          @if (User.IsInRole("Administrator"))
-          {
-            <hr />
-            <div class="card-body">
-              <h5>[Administration Tools]</h5>
-              <a class="btn btn-warning" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
-              <a class="btn btn-danger" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+<div class="col-md-6">
+        <form asp-action="Index">
+            <div class="input-group">
+                <select class="form-control" name="sortBy">
+                    <option value="">Sort by</option>
+                    <option value="Title"> @(Model.SortBy == "Title" ? "selected" : "")Name</option>
+                    <option value="Category">@(Model.SortBy == "Category" ? "selected" : "")Category</option>
+                    <option value="Price">@(Model.SortBy == "Price" ? "selected" : "")Price</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Apply</button>
             </div>
-          }
+        </form>
+    </div>
+
+<br>
+
+@* Add Product cards *@
+@if (Model.Products != null && Model.Products.Any())
+{
+  <div class="container">
+    <div class="row">
+      @foreach (var product in Model.Products)
+      {
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            @* <img class="card-img-top" src="@Html.DisplayFor(modelItem => product.Image)" alt="@Html.DisplayNameFor(model => product.Image)"> *@
+            <div class="card-body">
+              <h5 class="card-title">@product.Title</h5> 
+
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">@product.Category</li>
+              <li class="list-group-item">@product.Size</li>
+              <li class="list-group-item">@product.Price</li>
+
+            </ul>
+            <div class="card-body">
+              <a class="btn btn-success float-right" asp-action="Details" asp-route-id="@product.Id">
+                <i class="bi bi-eye-fill"></i> View Details
+              </a>
+              <a class="btn btn-primary float-right add-to-cart-btn" data-product-id="@product.Id">
+                <i class="bi bi-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+
+            @if (User.IsInRole("Administrator"))
+            {
+              <hr />
+              <div class="card-body">
+                <h5>[Administration Tools]</h5>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+              </div>
+            }
+          </div>
         </div>
-      </div>
-    }
+      }
+    </div>
   </div>
-</div>
+}
+else
+{
+  <p>No products found.</p>
+}
+
+
+
 
 @* Add Pagination buttons *@
 <nav aria-label="Page navigation">
     <ul class="pagination">
-        @for (int i = 1; i <= Model.TotalPages; i++)
+        @for (int i = 1; i <= Model.TotalPages; i++) //Start at and display page 1, for as long as the value of total pages is less than i, then increment i and add a button
         {
             <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
                 <a class="page-link" asp-action="Index" asp-route-pageNumber="@i">@i</a>
