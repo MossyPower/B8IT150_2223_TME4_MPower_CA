@@ -3,6 +3,7 @@ using FarmApp.Data;
 using FarmApp.Models;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace FarmApp.Controllers
 {
@@ -19,17 +20,28 @@ namespace FarmApp.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            int pageNumber = 1, 
+            int pageSize = 10, 
+            string sortBy = null,
+            string search = null)
         {
-            HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");
+            var apiClient = _clientFactory.CreateClient("ProductsApi");
+            var apiUrl = $"api/v1/products?pageNumber={pageNumber}&pageSize={pageSize}&sortBy={sortBy}&search={search}";
 
-            HttpRequestMessage request = new(method: HttpMethod.Get, requestUri:"/api/v1/products");
-            
-            HttpResponseMessage response = await client.SendAsync(request);
-            
-            IEnumerable<Product>? model = await response.Content.ReadFromJsonAsync<IEnumerable<Product>>();
+            var response = await apiClient.GetAsync(apiUrl);
 
-            return View(model);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ProductsViewModel>(content);
+
+                return View(result);
+            }
+            else
+            {
+                return View(new ProductsViewModel());
+            }
         }
 
         // GET: Products/Details/5
@@ -202,6 +214,10 @@ namespace FarmApp.Controllers
         private bool ProductExists(int id)
         {
           return (_context.Product?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private class PaginationResult
+        {
         }
     }
 }

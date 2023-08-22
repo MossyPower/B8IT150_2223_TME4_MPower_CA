@@ -17,14 +17,52 @@ namespace ProductsApi.Controllers
         }
 
         // GET: api/Products (Read / retrun all products)
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        // {
+        //   if (_context.Products == null)
+        //   {
+        //       return NotFound();
+        //   }
+        //     return await _context.Products.ToListAsync();
+        // }
+        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public IActionResult GetProducts(
+            int pageNumber = 1,
+            int pageSize = 10, 
+            string sortBy = null, 
+            string search = null)
         {
-          if (_context.Products == null)
-          {
-              return NotFound();
-          }
-            return await _context.Products.ToListAsync();
+            var query = _context.Products.AsQueryable();
+
+            // Filtering
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(p => p.Title.Contains(search));
+            }
+
+            // Sorting
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                query = query.OrderBy(p => p.Title); // Example sorting by name
+            }
+
+            // Pagination
+            var totalItems = query.Count();
+            var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            var itemsToSkip = (pageNumber - 1) * pageSize;
+
+            var products = query.Skip(itemsToSkip).Take(pageSize).ToList();
+
+            return Ok(new
+            {
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                Products = products
+            });
         }
 
         // GET: api/Products/5 (Read / return products by ID)
