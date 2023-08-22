@@ -1,17 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using FarmApp.Data;
 using FarmApp.Models;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Json;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 
 namespace FarmApp.Controllers
 {
@@ -64,16 +55,6 @@ namespace FarmApp.Controllers
                 return StatusCode((int)response.StatusCode);
             }
         }
-
-
-
-
-
-
-
-
-
-
 
         // GET: Products/Create
         [Authorize(Roles = "Administrator")]

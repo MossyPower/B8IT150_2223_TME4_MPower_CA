@@ -10,5 +10,5 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options)
     {
     }
-    public DbSet<FarmApp.Models.Product> Product { get; set; } = default!;
+    public DbSet<Product> Product { get; set; } = default!;
 }

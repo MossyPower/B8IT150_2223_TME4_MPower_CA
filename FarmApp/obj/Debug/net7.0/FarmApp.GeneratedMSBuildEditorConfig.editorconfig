@@ -9,65 +9,65 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FarmApp
 build_property.RootNamespace = FarmApp
-build_property.ProjectDir = C:\Users\mossy\Documents\GitHub\B8IT150_2223_TME4_MPower_CA\FarmApp\
+build_property.ProjectDir = c:\Users\mossy\Documents\GitHub\B8IT150_2223_TME4_MPower_CA\FarmApp\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\mossy\Documents\GitHub\B8IT150_2223_TME4_MPower_CA\FarmApp
+build_property.MSBuildProjectDirectory = c:\Users\mossy\Documents\GitHub\B8IT150_2223_TME4_MPower_CA\FarmApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Areas/Identity/Pages/_ViewStart.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Home/Index.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Home/Privacy.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Create.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Delete.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Details.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Edit.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Index.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/Error.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/_LoginPartial.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/_ViewImports.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/_ViewStart.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/_Layout.cshtml]
+[c:/Users/mossy/Documents/GitHub/B8IT150_2223_TME4_MPower_CA/FarmApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-e10z2x977r
