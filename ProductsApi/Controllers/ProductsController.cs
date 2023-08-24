@@ -53,10 +53,6 @@ namespace ProductsApi.Controllers
                 {
                     query = query.OrderBy(p => p.Category);
                 }
-                else if (sortBy == "Price")
-                {
-                    query = query.OrderBy(p => p.Price);
-                }
             }
 
             // Pagination
