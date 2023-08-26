@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\ProductsApi\\ProductsApi.csproj": {}
+    "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\Productsapi\\ProductsApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\ProductsApi\\ProductsApi.csproj": {
+    "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\Productsapi\\ProductsApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\ProductsApi\\ProductsApi.csproj",
+        "projectUniqueName": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\Productsapi\\ProductsApi.csproj",
         "projectName": "ProductsApi",
-        "projectPath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\ProductsApi\\ProductsApi.csproj",
+        "projectPath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\Productsapi\\ProductsApi.csproj",
         "packagesPath": "C:\\Users\\mossy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\ProductsApi\\obj\\",
+        "outputPath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\Productsapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mossy\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 using FarmApp.Data;
+using FarmApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
