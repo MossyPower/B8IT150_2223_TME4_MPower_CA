@@ -3,3 +3,15 @@
 
 // Write your JavaScript code.
 
+// Confirm Delete User
+function confirmDelete(uniqueId, isDeleteClicked){
+    var deleteTd = 'deleteTd_' + uniqueId;
+    var confirmDeleteTd = 'confirmDeleteTd_' + uniqueId;
+    if(isDeleteClicked){
+        $('#' + deleteTd).hide();
+        $('#' + confirmDeleteTd).show();
+    }else{
+        $('#' + deleteTd).show();
+        $('#' + confirmDeleteTd).hide();        
+    }
+}

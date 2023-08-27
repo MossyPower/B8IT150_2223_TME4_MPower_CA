@@ -23,6 +23,68 @@ namespace FarmApp.Controllers
             this.userManager = userManager;
         }
 
+        // Delete User
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            // check if id from url is contained in the users Database
+            var user = await userManager.FindByIdAsync(id);
+
+            // Check if role exists. If role does not exist, return 'Not Found' message
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                // If id is found, delete the user
+                var result = await userManager.DeleteAsync(user);
+
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(ListUsers);
+            }
+        }
+
+        // Delete Role
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            // check if id from url is contained in the users Database
+            var role = await roleManager.FindByIdAsync(id);
+
+            // Check if role exists. If role does not exist, return 'Not Found' message
+            if(role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                // If id is found, delete the user
+                var result = await roleManager.DeleteAsync(role);
+
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(ListRoles);
+            }
+        }
+
         // Return : Administration Portal View
         public IActionResult Index()
         {

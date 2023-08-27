@@ -28,21 +28,28 @@
         </thead>
         @foreach(var role in Model)
         {
-        <tbody>
-            <tr>
-                <td>@role.Name</td>
-                <td>@role.Id</td>
-                <td>
-                    <a class="btn btn-warning" asp-action="EditRole"
-                        asp-controller="Administration" asp-route-id="@role.Id">
-                        Edit
-                    </a>
-                </td>
-                <td>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-        </tbody>
+            <tbody>
+                <tr>                    
+                    <td>@role.Name</td>
+                    <td>@role.Id</td>                
+                    <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                        <td>
+                            <a asp-action="EditRole" asp-controller="Administration" 
+                                asp-route-id="@role.Id" class="btn btn-warning">Edit</a>
+                        </td>
+                        <td id="deleteTd_@role.Id">
+                            <a href="#" class="btn btn-danger"
+                                onclick="confirmDelete('@role.Id', true)">Delete</a>
+                        </td>                    
+                        <td id="confirmDeleteTd_@role.Id" style="display:none">
+                            <span>Are you sure you want to delete?</span>
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                            <a href="#" class="btn btn-primary"
+                                onclick="confirmDelete('@role.Id', false)">No</a>
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
         }
     </table>
 }
@@ -58,4 +65,8 @@ else
             </a>
         </div>
     </div>
+}
+
+@section Scripts {
+    <script src="~/js/site.js"> </script>
 }
