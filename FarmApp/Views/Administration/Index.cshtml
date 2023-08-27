@@ -11,17 +11,15 @@
 @* Create new company role functionality *@
 @if (User.IsInRole("Administrator"))
 {
-  <div class="container">
-        <a asp-action="ListRoles" class="btn btn-primary search-btn">List of Company Roles</a>
-  </div>
+    <div class="container">
+        <a asp-action="ListRoles" class="btn btn-primary search-btn">Manage company roles</a>
+    </div>
+    <hr>
+    <div class="container">
+        <a asp-action="ListUsers" class="btn btn-primary search-btn">Manage company users</a>
+    </div>
+
 }
-
-<hr>
-
-<div class="container">
-    <a href="#" class="btn btn-primary search-btn">List of Users</a>
-</div>
-
 <hr>
 <br> 
 
@@ -39,13 +37,13 @@
 <hr>
 
 <div class="container">
-    <a href="#" class="btn btn-secondary search-btn">Stock</a>
+    <a href="#" class="btn btn-secondary search-btn">Accounting</a>
 </div>
 
 <hr>
 
 <div class="container">
-    <a href="#" class="btn btn-secondary search-btn">Accounting</a>
+    <a href="#" class="btn btn-secondary search-btn">Human resources</a>
 </div>
 
 <hr>

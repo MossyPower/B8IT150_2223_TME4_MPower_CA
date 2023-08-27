@@ -9,6 +9,7 @@ using System.Drawing;
 
 namespace FarmApp.Controllers
 {
+    // 
     [Authorize(Roles = "Administrator")]
     public class AdministrationController : Controller
     {
@@ -28,6 +29,14 @@ namespace FarmApp.Controllers
             return View();
         }
         
+        // Return : ListUsers View
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
         // Return : CreateRole View
         [HttpGet]
         public IActionResult CreateRole()
@@ -220,9 +229,7 @@ namespace FarmApp.Controllers
                         return RedirectToAction("EditRole", new { Id = roleId});
                 }
             }
-
             return RedirectToAction("EditRole", new { Id = roleId});
         }
-
     }
 }

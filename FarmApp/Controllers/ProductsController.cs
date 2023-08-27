@@ -74,7 +74,7 @@ namespace FarmApp.Controllers
         }
 
         // GET: Products/Create
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Manager")]
         public IActionResult Create()
         {
             return View();
@@ -103,7 +103,7 @@ namespace FarmApp.Controllers
         }
 
         // GET: Products/Edit/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -163,7 +163,7 @@ namespace FarmApp.Controllers
         }
 
         // GET: Products/Delete/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -194,7 +194,7 @@ namespace FarmApp.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Manager")] //Can be logged in as either role to access this method
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             HttpClient client = _clientFactory.CreateClient(name: "ProductsApi");

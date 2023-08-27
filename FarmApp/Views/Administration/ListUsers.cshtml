@@ -1,27 +1,24 @@
-@* MP: From youtube video "Edit rle in asp net core": https://www.youtube.com/watch?v=7ikyZk5fGzk&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=80&ab_channel=kudvenkat *@
-
-
-@model IEnumerable<IdentityRole>
+@model IEnumerable<ApplicationUser>
 @using Microsoft.AspNetCore.Identity
 
 @{
-    ViewData["Title"] = "All Company Roles";
+    ViewData["Title"] = "All Company Users";
 }
-<h1>Company Roles</h1>
+<h1>All website users</h1>
 <hr>
 
 @if(Model.Any())
 {
-    <a class="btn btn-primary" asp-action="CreateRole"
-        asp-controller="administration">Create New Company Role</a>
+    <a class="btn btn-primary" asp-action="Account"
+        asp-controller="administration">Create New User</a>
     <a class ="btn btn-secondary reset-btn" asp-action="Index" asp-controller="administration">
         Back to Administration Portal</a>
     <hr>
     <table class="table table-striped">
         <thead class="thead-light">
             <tr>
-                <th scope="col">Company role</th>
-                <th scope="col">Role ID</th>
+                <th scope="col">User Name</th>
+                <th scope="col">User ID</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -30,8 +27,8 @@
         {
         <tbody>
             <tr>
-                <td>@role.Name</td>
-                <td>@role.Id</td>
+                @* <td>@user.UserName</td> *@
+                @* <td>@user.UserId</td> *@
                 <td>
                     <a class="btn btn-warning" asp-action="EditRole"
                         asp-controller="Administration" asp-route-id="@role.Id">
@@ -49,12 +46,12 @@
 else
 {
     <div class="card">
-        <div class="card-header">No roles created yet</div>
+        <div class="card-header">No users created yet</div>
         <div class="card-body">
-            <h5 class="card-title">use the button below to create a role</h5>
+            <h5 class="card-title">use the button below to create a user</h5>
             <a class="btn btn-primary"
                 asp-controller="administration" asp-action="CreateRole">
-                Create Role
+                Create User
             </a>
         </div>
     </div>
