@@ -24325,6 +24325,11 @@
       "FilePath": "c:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\Views\\Administration\\EditUser.cshtml",
+      "TargetPath": "Views\\Administration\\EditUser.cshtml",
+      "FileKind": "mvc"
     }
   ]
 }

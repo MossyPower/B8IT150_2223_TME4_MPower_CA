@@ -9,10 +9,15 @@
 
 @if(Model.Any())
 {
-    <a class="btn btn-primary" asp-action="Account"
-        asp-controller="administration">Create New User</a>
+
+    <a href="@Url.Content("~/Identity/Account/Register")" class="btn btn-primary">
+        Create New User
+    </a>
+    
     <a class ="btn btn-secondary reset-btn" asp-action="Index" asp-controller="administration">
-        Back to Administration Portal</a>
+        Back to Administration Portal
+    </a>
+    
     <hr>
     <table class="table table-striped">
         <thead class="thead-light">
@@ -30,8 +35,8 @@
                 <td>@user.UserName</td>
                 <td>@user.Id</td>
                 <td>
-                    <a class="btn btn-warning" asp-action="EditRole"
-                        asp-controller="Administration" asp-route-id="@user.Id">
+                    <a asp-action="EditUser" asp-controller="Administration" 
+                        asp-route-id="@user.Id" class="btn btn-warning">
                         Edit
                     </a>
                 </td>

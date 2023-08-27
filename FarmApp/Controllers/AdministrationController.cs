@@ -36,6 +36,69 @@ namespace FarmApp.Controllers
             var users = userManager.Users;
             return View(users);
         }
+        
+        // Return: EditUser View
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id) //id passed in from Url
+        {
+            // check if id from url is contained in the users Database
+            var user = await userManager.FindByIdAsync(id);
+
+            // Check if role exists. If role does not exist, return not found message
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            
+            // Retrive Claims & Roles data from underlying database. initialise the values in the userClaims & userRoles variables
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            // Retrive the user Id and Name that you want to edit, using the userManager injection  
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                Claims = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles
+            };
+            return View(model);
+        }
+
+        // Edit User
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model) //id passed in from Url
+        {
+            // check if id from url is contained in the users Database
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            // Check if role exists. If role does not exist, return not found message
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+
+                var result = await userManager.UpdateAsync(user);
+
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("Listusers");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
+        }
 
         // Return : CreateRole View
         [HttpGet]
