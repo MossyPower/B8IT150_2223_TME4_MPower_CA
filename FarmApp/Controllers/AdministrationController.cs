@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using FarmApp.Models;
 using FarmApp.Data;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Drawing;
 
 namespace FarmApp.Controllers
 {
@@ -135,5 +136,93 @@ namespace FarmApp.Controllers
                 return View(model);
             }
         }
+        
+        // Return EditUsersInRole View
+        [HttpGet]
+        public async Task<IActionResult> EditUsersInRole(string roleId)
+        {
+            // Pass role Id to the view
+            ViewBag.roleId = roleId;
+            
+            // retrive role from Identity database
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            // Check if role exists. If role does not exist, return not found message
+            if(role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
+            }
+            
+            //create an instance of the rolemodel calss
+            var model = new List<UserRoleViewModel>();
+
+
+            foreach(var user in userManager.Users)
+            {
+                var userRoleViewModel = new UserRoleViewModel
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName
+                };
+
+                if(await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRoleViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRoleViewModel.IsSelected = false;
+                }
+                model.Add(userRoleViewModel);
+            }
+            return View(model);
+        }
+
+        // Update Users RoleId (ref the EditUsersInRole View)
+        [HttpPost]
+        public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
+        {
+            // retrive role from Identity database
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            // Check if role exists. If role does not exist, return not found message
+            if(role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
+            }
+
+            for(int i = 0; i < model.Count; i++)
+            {
+                var user = await userManager.FindByIdAsync(model[i].UserId);
+
+                IdentityResult result = null;
+
+                if(model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
+                {
+                    result = await userManager.AddToRoleAsync(user, role.Name);
+                }
+                else if(!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    result = await userManager.RemoveFromRoleAsync(user, role.Name);
+                }
+                else
+                {
+                    continue;
+                }
+                
+                if(result.Succeeded)
+                {
+                    if(i < (model.Count - 1))
+                        continue;
+                    else
+                        return RedirectToAction("EditRole", new { Id = roleId});
+                }
+            }
+
+            return RedirectToAction("EditRole", new { Id = roleId});
+        }
+
     }
 }

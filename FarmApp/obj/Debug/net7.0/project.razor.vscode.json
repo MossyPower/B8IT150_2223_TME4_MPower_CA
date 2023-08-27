@@ -24120,6 +24120,11 @@
       "FilePath": "c:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\Views\\Shared\\NotFound.cshtml",
       "TargetPath": "Views\\Shared\\NotFound.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\FarmApp\\Views\\Administration\\EditUsersInRole.cshtml",
+      "TargetPath": "Views\\Administration\\EditUsersInRole.cshtml",
+      "FileKind": "mvc"
     }
   ]
 }
