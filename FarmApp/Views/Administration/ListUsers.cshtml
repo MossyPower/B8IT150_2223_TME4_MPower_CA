@@ -23,15 +23,15 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        @foreach(var role in Model)
+        @foreach(var user in Model)
         {
         <tbody>
             <tr>
-                @* <td>@user.UserName</td> *@
-                @* <td>@user.UserId</td> *@
+                <td>@user.UserName</td>
+                <td>@user.Id</td>
                 <td>
                     <a class="btn btn-warning" asp-action="EditRole"
-                        asp-controller="Administration" asp-route-id="@role.Id">
+                        asp-controller="Administration" asp-route-id="@user.Id">
                         Edit
                     </a>
                 </td>
