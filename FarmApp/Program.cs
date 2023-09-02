@@ -6,8 +6,18 @@ using FarmApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Session support - Cart functionality
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.IsEssential = true;
+});
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 
 
 // Add Db context at startup
@@ -37,6 +47,8 @@ builder.Services.AddHttpClient("ProductsApi", client =>
 
 
 var app = builder.Build();
+
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
