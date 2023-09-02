@@ -74,17 +74,17 @@ namespace FarmApp.Controllers
             // Get the cart
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
 
-            // 
+            // search for the cartItem in cart by id
             CartItem cartItem = cart.FirstOrDefault(c => c.ProductId == id); 
             
             if(cartItem == null)
             {
-                // if the cart item is null, then add new
+                // if the cart item is null, then add new a new cartItem of that id
                 cart.Add(new CartItem(product));
             }
             else
             {
-                // else if the cart item is not null, then increment quantity
+                // else if the cartItem is not null, then increment the qty of the product
                 cartItem.Quantity += 1;
             }
 
@@ -96,6 +96,87 @@ namespace FarmApp.Controllers
 
             // once add, redirect to whereever we came from
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        // Decrease the Qty of cartItem in the car
+        public async Task<IActionResult> Decrease(int id)
+        {
+            // Get the cart
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
+
+            // search for the cartItem in cart by id
+            CartItem cartItem = cart.FirstOrDefault(c => c.ProductId == id); 
+            
+            // if the cartItem is more than 1;
+            if(cartItem.Quantity > 1)
+            {
+                // then reduct the cart item qty by 1
+                cartItem.Quantity -= 1;
+            }
+            else
+            {
+                // else if the cartItem is 1, then remove the cartItem from the cart
+                cart.RemoveAll(p => p.ProductId == id);
+            }
+
+            // check if the cart is empty
+            if(cart.Count == 0)
+            {
+                // if cart is empty, remove the cart
+                HttpContext.Session.Remove("Cart");
+            }
+            else
+            {
+                // set the session cart again
+                HttpContext.Session.SetJson("Cart", cart);
+            }
+
+            // Notification message
+            TempData["Success"] = "The product has been removed!";
+
+            // once removed, redirect to Cart index
+            return RedirectToAction("index");
+        }
+
+        // Remove a cartItem from cart
+        public async Task<IActionResult> Remove(int id)
+        {
+            // Get the cart
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
+
+            // search for the cartItem in cart by id
+            CartItem cartItem = cart.FirstOrDefault(c => c.ProductId == id); 
+            
+            // Remove cartItem by id
+            cart.RemoveAll(p => p.ProductId == id);
+
+
+            // if the cartItem is empty,
+            if(cart.Count == 0)
+            {
+                // end the session
+                HttpContext.Session.Remove("Cart");
+            }
+            else
+            {
+                // else, continue with the session
+                HttpContext.Session.SetJson("Cart", cart);
+            }
+
+            // Notification message
+            TempData["Success"] = "The product has been removed!";
+
+            // once removed, redirect to Cart index
+            return RedirectToAction("index");
+        }
+        // Clear the cart of all products
+        public IActionResult Clear()
+        {
+            // end the session
+            HttpContext.Session.Remove("Cart");
+
+            // redirect to Cart index
+            return RedirectToAction("index");
         }
     }
 }
