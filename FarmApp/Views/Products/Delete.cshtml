@@ -34,12 +34,55 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Price)
+        </dd>      
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Variety)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Variety)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Season)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Season)
+        </dd>
+                <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fertiliser)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Fertiliser)
+        </dd>
+                <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pesticide)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pesticide)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Herbicide)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Herbicide)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fungicide)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fungicide)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
+</div>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class ="btn btn-secondary reset-btn" asp-action="Index">Back to List</a>
     </form>
 </div>

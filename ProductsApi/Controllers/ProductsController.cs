@@ -15,17 +15,6 @@ namespace ProductsApi.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Products (Read / retrun all products)
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-        // {
-        //   if (_context.Products == null)
-        //   {
-        //       return NotFound();
-        //   }
-        //     return await _context.Products.ToListAsync();
-        // }
         
         [HttpGet]
         public IActionResult GetProducts(

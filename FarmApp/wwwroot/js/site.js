@@ -15,3 +15,12 @@ function confirmDelete(uniqueId, isDeleteClicked){
         $('#' + confirmDeleteTd).hide();        
     }
 }
+
+
+// function ProductAdded(addToCartIsClicked){
+//     var addToCart = 'AddToCart';
+//     var productAdded = 'ProductAdded';
+//      if(addToCartIsClicked){
+//          $().show();
+//      }
+// }

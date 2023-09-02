@@ -33,17 +33,50 @@
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Variety" class="control-label"></label>
+                <input asp-for="Variety" class="form-control" />
+                <span asp-validation-for="Variety" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Season" class="control-label"></label>
+                <input asp-for="Season" class="form-control" />
+                <span asp-validation-for="Season" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fertiliser" class="control-label"></label>
+                <input asp-for="Fertiliser" class="form-control" />
+                <span asp-validation-for="Fertiliser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pesticide" class="control-label"></label>
+                <input asp-for="Pesticide" class="form-control" />
+                <span asp-validation-for="Pesticide" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Herbicide" class="control-label"></label>
+                <input asp-for="Herbicide" class="form-control" />
+                <span asp-validation-for="Herbicide" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fungicide" class="control-label"></label>
+                <input asp-for="Fungicide" class="form-control" />
+                <span asp-validation-for="Fungicide" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
             <br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-warning" />
+                <a class ="btn btn-secondary reset-btn" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 <br>
-<div>
-    <a class ="btn btn-secondary reset-btn" asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

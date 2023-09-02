@@ -29,7 +29,7 @@
             </tr>
         }
         <tr>
-            <td class="text-right" colspan="4">Grand Total:@Model.GrandTotal.ToString("C2")</td>
+            <td class="text-right" colspan="4">Total: @Model.GrandTotal.ToString("C2")</td>
         </tr>
         <tr>
             <td class="text-right" colspan="4">
@@ -41,5 +41,9 @@
 }
 else
 {
-    <h2 class="lead m-0">Your cart is empty</h2>
+    <h2>Your shopping cart is empty</h2>
+    <hr>
+    <br>
+    <h4>Total: @Model.GrandTotal.ToString("C2")</h4>
+    <hr>
 }
