@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using FarmApp.Models;
-using FarmApp.Data;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Drawing;
 
 namespace FarmApp.Controllers
 {
-    // 
+    // kudventkat (2019) Creating roles in asp net core. Available at: 
+    // https://www.youtube.com/watch?v=TuJd2Ez9i3I&ab_channel=kudvenkat 
     [Authorize(Roles = "Administrator")]
     public class AdministrationController : Controller
     {
@@ -22,7 +19,9 @@ namespace FarmApp.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
-
+        
+        // Kudvenkat (2019) Delete identity user in asp net core. Available at: https:
+        // www.youtube.com/watch?v=MhNfyZGfY-A&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=86&ab_channel=kudvenkat 
         // Delete User
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
@@ -53,7 +52,9 @@ namespace FarmApp.Controllers
                 return View(ListUsers);
             }
         }
-
+        
+        // Kudvenkat (2019) Delete identity role in asp net core. Available at: https:
+        // www.youtube.com/watch?v=pj3GCelrIGM&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=88&ab_channel=kudvenkat 
         // Delete Role
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string id)
@@ -84,13 +85,15 @@ namespace FarmApp.Controllers
                 return View(ListRoles);
             }
         }
-
+        
         // Return : Administration Portal View
         public IActionResult Index()
         {
             return View();
         }
         
+        // kudventkat (2019) List all users from asp net core identity database. Available at:  https:
+        // www.youtube.com/watch?v=OMX0UiLpMSA&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=84&ab_channel=kudvenkat 
         // Return : ListUsers View
         [HttpGet]
         public IActionResult ListUsers()
@@ -99,6 +102,8 @@ namespace FarmApp.Controllers
             return View(users);
         }
         
+        // Kudvenkat (2019) Edit identity user in asp net core. Available at: https:
+        // www.youtube.com/watch?v=QYlIfH8qyrU&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=85&ab_channel=kudvenkat 
         // Return: EditUser View
         [HttpGet]
         public async Task<IActionResult> EditUser(string id) //id passed in from Url
@@ -128,7 +133,9 @@ namespace FarmApp.Controllers
             };
             return View(model);
         }
-
+        
+        // Kudvenkat (2019) Edit identity user in asp net core. Available at: https:
+        // www.youtube.com/watch?v=QYlIfH8qyrU&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=85&ab_channel=kudvenkat 
         // Edit User
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel model) //id passed in from Url
@@ -161,14 +168,19 @@ namespace FarmApp.Controllers
                 return View(model);
             }
         }
-
+        
+        // kudventkat (2019) Creating roles in asp net core. Available at: 
+        // https://www.youtube.com/watch?v=TuJd2Ez9i3I&ab_channel=kudvenkat 
         // Return : CreateRole View
         [HttpGet]
         public IActionResult CreateRole()
         {
+            // return the CreateRole view
             return View();
         }
 
+        // kudventkat (2019) Creating roles in asp net core. Available at: 
+        // https://www.youtube.com/watch?v=TuJd2Ez9i3I&ab_channel=kudvenkat 
         // Create new role
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
@@ -194,6 +206,8 @@ namespace FarmApp.Controllers
             return View(model);
         }
         
+        // kudventkat (2019) Get list of roles in asp core net. 
+        // Available at: https://www.youtube.com/watch?v=KGIT8P29jf4&ab_channel=kudvenkat 
         // Return List Roles view
         [HttpGet]
         public IActionResult ListRoles()
@@ -202,6 +216,8 @@ namespace FarmApp.Controllers
             return View(roles);
         }
 
+        // kudventkat (2019) Edit role in asp net core. Available at:
+        // https://www.youtube.com/watch?v=7ikyZk5fGzk&ab_channel=kudvenkat 
         // Return Edit Roles view
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
@@ -232,7 +248,9 @@ namespace FarmApp.Controllers
             }
             return View(model);
         }
-
+        
+        // kudventkat (2019) Edit role in asp net core. Available at:
+        // https://www.youtube.com/watch?v=7ikyZk5fGzk&ab_channel=kudvenkat 
         // Edit user role 
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
@@ -271,6 +289,8 @@ namespace FarmApp.Controllers
             }
         }
         
+        // kudventkat (2019) Edit role in asp net core. Available at:
+        // https://www.youtube.com/watch?v=7ikyZk5fGzk&ab_channel=kudvenkat 
         // Return EditUsersInRole View
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
@@ -313,6 +333,8 @@ namespace FarmApp.Controllers
             return View(model);
         }
 
+        // kudventkat (2019) Add or remove users from role in asp net core. Available at: https:
+        // www.youtube.com/watch?v=TzhqymQm5kw&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=81&ab_channel=kudvenkat 
         // Update Users RoleId (ref the EditUsersInRole View)
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
@@ -327,13 +349,14 @@ namespace FarmApp.Controllers
                 return View("NotFound");
             }
 
+            // loop through each user view model passed in via the model parameter
             for(int i = 0; i < model.Count; i++)
             {
                 var user = await userManager.FindByIdAsync(model[i].UserId);
 
                 IdentityResult result = null;
 
-                if(model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
+                if(model[i].IsSelected && !await userManager.IsInRoleAsync(user, role.Name))
                 {
                     result = await userManager.AddToRoleAsync(user, role.Name);
                 }

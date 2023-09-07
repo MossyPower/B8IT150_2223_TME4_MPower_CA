@@ -6,6 +6,8 @@ using FarmApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Blender Up (2022) ASP.NET Core 6 .NET 6 Project - Shopping Cart. Available at: https:
+// www.youtube.com/watch?v=sX3g6hQZ8Lw&t=2705s&ab_channel=BlenderUp 
 // Session support - Cart functionality
 builder.Services.AddDistributedMemoryCache();
 
@@ -16,8 +18,8 @@ builder.Services.AddSession(options =>
 });
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? 
+    throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 
 // Add Db context at startup
@@ -48,6 +50,8 @@ builder.Services.AddHttpClient("ProductsApi", client =>
 
 var app = builder.Build();
 
+// Blender Up (2022) ASP.NET Core 6 .NET 6 Project - Shopping Cart. Available at: https:
+// www.youtube.com/watch?v=sX3g6hQZ8Lw&t=2705s&ab_channel=BlenderUp 
 app.UseSession();
 
 // Configure the HTTP request pipeline.

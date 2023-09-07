@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
+// kudventkat (2019) Edit role in asp net core. Available at:
+// https://www.youtube.com/watch?v=7ikyZk5fGzk&ab_channel=kudvenkat 
+
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FarmApp.Models
 {

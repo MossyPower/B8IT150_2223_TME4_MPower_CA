@@ -1,3 +1,6 @@
+// Kudvenkat (2019) Edit identity user in asp net core. Available at: https:
+// www.youtube.com/watch?v=QYlIfH8qyrU&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=85&ab_channel=kudvenkat
+ 
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 

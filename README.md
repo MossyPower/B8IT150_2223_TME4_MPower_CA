@@ -10,7 +10,7 @@
 - Student ID: 10609394
 - Email: 10609394@mydbs.ie
 - Submission Date: 10 September 2023
-- Document size: 2,350 words
+- Document size: 1,800 words
  
 # Table of Contents
 1.	Project Overview
