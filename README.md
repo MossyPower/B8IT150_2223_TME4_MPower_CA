@@ -113,10 +113,14 @@ The key data entities for this application include:
 -	Cart: 
 -	Cart Item: 
 -	Audit Log:  
+
+In addition to the above, Microsofts ASP.NET Core Identity API is used to manage the web applications Authorisation functionality
+
 As part of future development external APIs will be implemented for:
 -	Payments (e.g., PayPal, Stripe, MasterCard, etc.) 
 -	Ability to upload photos to cloud based storage for use in the e-commerce application (e.g. to promote display new products).
 -	Sign-in with Google
+
 
 ## 4.4 Functionality
 
@@ -213,11 +217,11 @@ Originally the requirements scheduled below were included in the original scope 
 -	Deployment of the web application. 
 
 ## 5.3 Future Development
--	Set up reporting.
+-	Resolve all null referance warnings.
+-   Set up reporting.
 -	Move cart / orders to a separate web API.
 -	Introduce a data access layer to promote ‘do not repeat’ (“DRY”) coding principles. The various controllers would handle http requests while the data access layer would be used to  handle the various functions. 
--	Add authentication to APIs (JWT token)
-
+-	Add authentication to API(s) (JWT token).
 
 # 6.0 References - Summary of code attributes / reference material
 The following resources were used to aid in the development of this web application:
