@@ -1,4 +1,23 @@
-﻿@{
+﻿@model PrivacyModel
+@using Microsoft.AspNetCore.Identity
+
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>Privacy</h1>
+
+@if (Model != null)
+{
+    <tbody>
+        <tr>                    
+            <td>@Model.Description</td>
+        </tr>
+    </tbody>
+}
+
+@if (User.IsInRole("Administrator"))
+{
+    <div class="container">
+        <a asp-action="EditPrivacy" class="btn btn-primary search-btn">Edit</a>
+    </div>
+}

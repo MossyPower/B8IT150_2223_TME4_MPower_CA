@@ -18,26 +18,32 @@ namespace ProductsApi.Controllers
         
         [HttpGet]
         public IActionResult GetProducts(
-            int pageNumber = 1,
-            int pageSize = 10, // Nr of items per page
-            string sortBy = null, 
-            string search = null)
+            int pageNumber = 1, // default pageNumber = 1
+            int pageSize = 10, // Default nr of items per page = 10
+            string? sortBy = null, // default sortBy value = null
+            string? search = null) // default search value = null
         {
+            // initialise query variable with all products retrived from the Db
             var query = _context.Products.AsQueryable();
 
-            // Searching 
+            // search
+            // If search parameter is not null, them 
             if (!string.IsNullOrEmpty(search))
             {
+                // Search the Products Db Title attribute for any value matching the search parameter value 
                 query = query.Where(p => EF.Functions.Like(p.Title, $"%{search}%"));
             }
 
             // Sorting
+            // If the sortBy parameter contains a value, then;
             if (!string.IsNullOrWhiteSpace(sortBy))
             {
+                // Sort by title, asending
                 if (sortBy == "Title")
                 {
                     query = query.OrderBy(p => p.Title);
                 }
+                // sort by category, asending
                 else if (sortBy == "Category")
                 {
                     query = query.OrderBy(p => p.Category);
@@ -45,12 +51,20 @@ namespace ProductsApi.Controllers
             }
 
             // Pagination
+            // Count nr of objects contained in the DB
             var totalItems = query.Count();
+            
+            // Calculate total number of pages needed to display all products, initialise totalPages with the value
+            // Calculate depending on number of products that can be displayed per page (default pageSize = 10)
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            
+            // Calculate number of items in the db to skip based on number of items per page
             var itemsToSkip = (pageNumber - 1) * pageSize;
 
+            // Initialise products list with number of items that can fit on a single page (pageSize), skip remaining items
             var products = query.Skip(itemsToSkip).Take(pageSize).ToList();
 
+            // Return paginated metadata and list of products to the main application
             return Ok(new
             {
                 TotalItems = totalItems,
@@ -106,7 +120,6 @@ namespace ProductsApi.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 

@@ -10,6 +10,7 @@ namespace FarmApp.Controllers
     [Authorize(Roles = "Administrator")]
     public class AdministrationController : Controller
     {
+        // Add Constructor for user and role 
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -20,91 +21,38 @@ namespace FarmApp.Controllers
             this.userManager = userManager;
         }
         
-        // Kudvenkat (2019) Delete identity user in asp net core. Available at: https:
-        // www.youtube.com/watch?v=MhNfyZGfY-A&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=86&ab_channel=kudvenkat 
-        // Delete User
-        [HttpPost]
-        public async Task<IActionResult> DeleteUser(string id)
-        {
-            // check if id from url is contained in the users Database
-            var user = await userManager.FindByIdAsync(id);
-
-            // Check if role exists. If role does not exist, return 'Not Found' message
-            if(user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
-                return View("NotFound");
-            }
-            else
-            {
-                // If id is found, delete the user
-                var result = await userManager.DeleteAsync(user);
-
-                if(result.Succeeded)
-                {
-                    return RedirectToAction("ListUsers");
-                }
-
-                foreach(var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-                return View(ListUsers);
-            }
-        }
-        
-        // Kudvenkat (2019) Delete identity role in asp net core. Available at: https:
-        // www.youtube.com/watch?v=pj3GCelrIGM&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=88&ab_channel=kudvenkat 
-        // Delete Role
-        [HttpPost]
-        public async Task<IActionResult> DeleteRole(string id)
-        {
-            // check if id from url is contained in the users Database
-            var role = await roleManager.FindByIdAsync(id);
-
-            // Check if role exists. If role does not exist, return 'Not Found' message
-            if(role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
-                return View("NotFound");
-            }
-            else
-            {
-                // If id is found, delete the user
-                var result = await roleManager.DeleteAsync(role);
-
-                if(result.Succeeded)
-                {
-                    return RedirectToAction("ListRoles");
-                }
-
-                foreach(var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-                return View(ListRoles);
-            }
-        }
         
         // Return : Administration Portal View
         public IActionResult Index()
         {
             return View();
-        }
+        }        
+        
+        
+        // USER MANAGEMENT
+        // 1. Return List Users View
+        // 2. Return Create User View
+        // 3. Create User
+        // 4. Return Edit User View
+        // 5. Edit User
+        // 6. Return Delete User View
+        // 7. Delete User
+
         
         // kudventkat (2019) List all users from asp net core identity database. Available at:  https:
         // www.youtube.com/watch?v=OMX0UiLpMSA&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=84&ab_channel=kudvenkat 
-        // Return : ListUsers View
+        // 1. Return : ListUsers View
         [HttpGet]
         public IActionResult ListUsers()
         {
             var users = userManager.Users;
             return View(users);
         }
+
         
         // Kudvenkat (2019) Edit identity user in asp net core. Available at: https:
         // www.youtube.com/watch?v=QYlIfH8qyrU&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=85&ab_channel=kudvenkat 
-        // Return: EditUser View
+        // 4. Return: EditUser View
         [HttpGet]
         public async Task<IActionResult> EditUser(string id) //id passed in from Url
         {
@@ -136,7 +84,7 @@ namespace FarmApp.Controllers
         
         // Kudvenkat (2019) Edit identity user in asp net core. Available at: https:
         // www.youtube.com/watch?v=QYlIfH8qyrU&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=85&ab_channel=kudvenkat 
-        // Edit User
+        // 5. Edit User
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel model) //id passed in from Url
         {
@@ -168,10 +116,63 @@ namespace FarmApp.Controllers
                 return View(model);
             }
         }
-        
+
+        // Kudvenkat (2019) Delete identity user in asp net core. Available at: https:
+        // www.youtube.com/watch?v=MhNfyZGfY-A&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=86&ab_channel=kudvenkat 
+        // 7. Delete User
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            // check if id from url is contained in the users Database
+            var user = await userManager.FindByIdAsync(id);
+
+            // Check if role exists. If role does not exist, return 'Not Found' message
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                // If id is found, delete the user
+                var result = await userManager.DeleteAsync(user);
+
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(ListUsers);
+            }
+        }
+
+
+        // ROLE MANAGEMENT
+        // 1. Return List Roles View
+        // 2. Return Create Role View
+        // 3. Create New Role
+        // 4. Return Edit Roles View
+        // 5. Edit User Role 
+        // 6. Delete Role
+
+
+        // kudventkat (2019) Get list of roles in asp core net. 
+        // Available at: https://www.youtube.com/watch?v=KGIT8P29jf4&ab_channel=kudvenkat 
+        // 1. Return List Roles view
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            var roles = roleManager.Roles;
+            return View(roles);
+        }
+
         // kudventkat (2019) Creating roles in asp net core. Available at: 
         // https://www.youtube.com/watch?v=TuJd2Ez9i3I&ab_channel=kudvenkat 
-        // Return : CreateRole View
+        // 2. Return : CreateRole View
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -181,7 +182,7 @@ namespace FarmApp.Controllers
 
         // kudventkat (2019) Creating roles in asp net core. Available at: 
         // https://www.youtube.com/watch?v=TuJd2Ez9i3I&ab_channel=kudvenkat 
-        // Create new role
+        // 3. Create new role
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
         {
@@ -196,7 +197,7 @@ namespace FarmApp.Controllers
 
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("ListRoles", "AdministrationController");
+                    return RedirectToAction("ListRoles", "Administration");
                 }
                 foreach(IdentityError error in result.Errors)
                 {
@@ -206,19 +207,9 @@ namespace FarmApp.Controllers
             return View(model);
         }
         
-        // kudventkat (2019) Get list of roles in asp core net. 
-        // Available at: https://www.youtube.com/watch?v=KGIT8P29jf4&ab_channel=kudvenkat 
-        // Return List Roles view
-        [HttpGet]
-        public IActionResult ListRoles()
-        {
-            var roles = roleManager.Roles;
-            return View(roles);
-        }
-
         // kudventkat (2019) Edit role in asp net core. Available at:
         // https://www.youtube.com/watch?v=7ikyZk5fGzk&ab_channel=kudvenkat 
-        // Return Edit Roles view
+        // 4. Return Edit Roles view
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
@@ -251,7 +242,7 @@ namespace FarmApp.Controllers
         
         // kudventkat (2019) Edit role in asp net core. Available at:
         // https://www.youtube.com/watch?v=7ikyZk5fGzk&ab_channel=kudvenkat 
-        // Edit user role 
+        // 5. Edit User Role 
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
@@ -288,7 +279,44 @@ namespace FarmApp.Controllers
                 return View(model);
             }
         }
+
+        // Kudvenkat (2019) Delete identity role in asp net core. Available at: https:
+        // www.youtube.com/watch?v=pj3GCelrIGM&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=88&ab_channel=kudvenkat 
+        // 6. Delete Role
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            // check if id from url is contained in the users Database
+            var role = await roleManager.FindByIdAsync(id);
+
+            // Check if role exists. If role does not exist, return 'Not Found' message
+            if(role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                // If id is found, delete the user
+                var result = await roleManager.DeleteAsync(role);
+
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View (ListRoles);
+            }
+        }
         
+
+
+        
+
         // kudventkat (2019) Edit role in asp net core. Available at:
         // https://www.youtube.com/watch?v=7ikyZk5fGzk&ab_channel=kudvenkat 
         // Return EditUsersInRole View

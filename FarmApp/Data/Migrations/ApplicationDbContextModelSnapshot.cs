@@ -81,6 +81,20 @@ namespace FarmApp.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("FarmApp.Models.PrivacyModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrivacyModel");
+                });
+
             modelBuilder.Entity("FarmApp.Models.Product", b =>
                 {
                     b.Property<int>("Id")

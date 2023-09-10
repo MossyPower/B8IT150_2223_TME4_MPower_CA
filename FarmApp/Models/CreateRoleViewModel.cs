@@ -9,6 +9,6 @@ namespace FarmApp.Models
     public class CreateRoleViewModel : IdentityUser
     {
         [Required]
-        public string RoleName {get; set;}
+        public string? RoleName {get; set;}
     }
 }
