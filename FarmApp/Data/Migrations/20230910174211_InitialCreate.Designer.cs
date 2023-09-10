@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FarmApp.Data.Migrations
+namespace FarmApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230827155433_RemoveCustomTag")]
-    partial class RemoveCustomTag
+    [Migration("20230910174211_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,6 +82,20 @@ namespace FarmApp.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("FarmApp.Models.PrivacyModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrivacyModel");
                 });
 
             modelBuilder.Entity("FarmApp.Models.Product", b =>

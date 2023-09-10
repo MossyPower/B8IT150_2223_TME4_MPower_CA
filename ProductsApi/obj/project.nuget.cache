@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Nlvh1Ybh/tiYAOhyKDKKYvGt3A+nUuW3cpI183XEV/92PmgzVkGyG88T2AB++1DVqN5e9k5JZuP2DRvB5n7HKw==",
+  "dgSpecHash": "LTQ6zucdjrJBv5E7dkRfS720ixwe9sEIFOcQF9PGz/IaU0EQ0VWA4m02xoiKKQTQr+jLaEZQWfKATyBiIq4RNQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\ProductsApi\\ProductsApi.csproj",
+  "projectFilePath": "C:\\Users\\mossy\\Documents\\GitHub\\B8IT150_2223_TME4_MPower_CA\\Productsapi\\ProductsApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mossy\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\mossy\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

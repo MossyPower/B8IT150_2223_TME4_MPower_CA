@@ -16,8 +16,9 @@ namespace FarmApp.Data
                 }
                 context.PrivacyModel.AddRange(
                     //Sample Description
-                    new PrivacyModel{Description = "Power Family Farm Privacy Statement"}
-                );
+                    new PrivacyModel{Description =
+                    "Enter you privacy statement here"
+                    });
                 context.SaveChanges();
             }
         }

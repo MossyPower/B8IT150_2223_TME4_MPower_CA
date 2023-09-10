@@ -24,8 +24,11 @@ namespace FarmApp.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            PrivacyModel privacyDesc = _context.PrivacyModel.FirstOrDefault();
+
+            return View(privacyDesc);
         }
+        
         // Return EditPrivacy View
         public IActionResult EditPrivacy()
         {
@@ -33,34 +36,82 @@ namespace FarmApp.Controllers
         }
 
         // Edit Privacy
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditPrivacy(int id, PrivacyModel privacyModel)
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> EditPrivacy(int id, PrivacyModel privacyModel)
+        // {
+        //     // Retrive existing description from the Db
+        //     var desc = _context.PrivacyModel.FirstOrDefault();
+
+
+        //     if (id != privacyModel.Id)
+        //     {
+        //         return BadRequest();
+        //     }
+
+        //     _context.Entry(privacyModel).State = EntityState.Modified;
+
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!EditPrivacyExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
+        //     //return NoContent();
+        //     return RedirectToAction("Privacy", "Home");
+        // }
+
+        // 5. Edit User Role 
+        [HttpPost]
+        public async Task<IActionResult> EditPrivacy(PrivacyModel model)
         {
-            if (id != privacyModel.Id)
+            // retrive role from database
+            //var role = await _context.PrivacyModel.FindByIdAsync(model.Id);
+            var desc = _context.PrivacyModel.FirstOrDefault();
+            
+            // Check if role exists. If role does not exist, return not found message
+            if(desc == null)
             {
-                return BadRequest();
+                ViewBag.ErrorMessage = $"Description cannot be found";
+                return View("NotFound");
             }
-
-            _context.Entry(privacyModel).State = EntityState.Modified;
-
-            try
+            else
             {
+                // Change the role Name
+                desc.Description = model.Description;
+
+                // update role in database
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EditPrivacyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
             //return NoContent();
             return RedirectToAction("Privacy", "Home");
+
+
+                // // Check if update successful
+                // if(result.Succeeded)
+                // {
+                //     return RedirectToAction("ListRoles");
+                // }
+                
+                // // catch any errors
+                // foreach(var error in result.Errors)
+                // {
+                //     ModelState.AddModelError("",error.Description);
+                // }
+                
+                // // re-render if any validation errors
+                // return View(model);
         }
+        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -68,9 +119,9 @@ namespace FarmApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private bool EditPrivacyExists(int id)
-        {
-            return (_context.PrivacyModel?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        // private bool EditPrivacyExists(int id)
+        // {
+        //     return (_context.PrivacyModel?.Any(e => e.Id == id)).GetValueOrDefault();
+        // }
     }
 }
