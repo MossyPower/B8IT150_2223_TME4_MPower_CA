@@ -6,6 +6,13 @@
 }
 <h1>Privacy</h1>
 
+<br>
+@if (Model != null)
+{
+    <div>@Model.Description</div>
+}
+<br>
+
 @* Create product functionality *@
 @if (User.IsInRole("Administrator"))
 {
@@ -18,9 +25,3 @@
     <hr />
   </div>
 }
-<br>
-@if (Model != null)
-{
-    <div>@Model.Description</div>
-}
-<br>

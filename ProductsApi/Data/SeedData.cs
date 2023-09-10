@@ -85,7 +85,7 @@ public static class SeedData
                             },         
                 //Sample record 6
                 new Product{Title = "Organic Garlic",  
-                            Image = "https://www.fruithillfarm.com/media/catalog/product/cachea83d16b6a1b667730ddb42964cf817f5/p/r/primor_n_com_.jpg",
+                            Image = "https://www.fruithillfarm.com/media/catalog/product/cache/a83d16b6a1b667730ddb42964cf817f5/m/e/messidrome_com_651.jpg",
                             Size = "500g", 
                             Category = "Vegetable", 
                             Price = Convert.ToDecimal(1.49),

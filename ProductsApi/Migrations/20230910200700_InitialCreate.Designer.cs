@@ -10,8 +10,8 @@ using ProductsApi.Data;
 namespace ProductsApi.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20230819151117_AddProducts")]
-    partial class AddProducts
+    [Migration("20230910200700_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

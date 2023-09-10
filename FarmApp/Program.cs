@@ -38,7 +38,7 @@ builder.Services.AddControllersWithViews();
 // Add Http Client at startup
 builder.Services.AddHttpClient("ProductsApi", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5252/");
+    client.BaseAddress = new Uri("http://localhost:5252");
     client.DefaultRequestHeaders.Accept.Add(
         new MediaTypeWithQualityHeaderValue(
             mediaType: "application/json",
@@ -82,7 +82,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Products}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();
